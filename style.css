@@ -1,0 +1,207 @@
+/* RESET Y FUENTES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+    padding-top: 80px;
+    /* Para no ocultar contenido bajo el menú fijo */
+}
+
+/* --------------------- */
+/* HEADER Y MENÚ DE NAVEGACIÓN */
+/* --------------------- */
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #002244;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+nav ul li {
+    position: relative;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.3s;
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: #004080;
+}
+
+/* Submenús */
+nav ul li ul {
+    display: none;
+    position: absolute;
+    background-color: #003366;
+    top: 40px;
+    left: 0;
+    min-width: 200px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li ul li {
+    margin: 0;
+}
+
+nav ul li ul li a {
+    padding: 10px;
+}
+
+i {
+    margin-right: 8px;
+    color: #004080;
+}
+
+nav i {
+    color: #fff;
+}
+
+
+/* --------------------- */
+/* CONTENIDO PRINCIPAL */
+/* --------------------- */
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --------------------- */
+/* SECCIONES CON COLORES */
+/* --------------------- */
+
+section {
+    padding: 40px 30px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+#inicio {
+    background-color: #e3f2fd;
+    /* Azul claro */
+}
+
+#modelos {
+    background-color: #f1f8e9;
+    /* Verde claro */
+}
+
+#seleccionando-modelos {
+    background-color: #fff3e0;
+    /* Naranja claro */
+}
+
+#recursos {
+    background-color: #fce4ec;
+    /* Rosa claro */
+}
+
+#rediseño {
+    background-color: #ede7f6;
+    /* Violeta claro */
+}
+
+#aplicacion {
+    background-color: #e0f7fa;
+    /* Cian claro */
+}
+
+#referencias {
+    background-color: #fafafa;
+    /* Gris muy claro */
+}
+
+/* TÍTULOS Y LISTAS */
+
+h2,
+h3 {
+    color: #003366;
+    margin-bottom: 15px;
+}
+
+ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* --------------------- */
+/* TABLA DE REDISEÑO */
+/* --------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: white;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #004080;
+    color: white;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* --------------------- */
+/* FOOTER */
+/* --------------------- */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #003366;
+    color: white;
+    font-size: 0.9em;
+}

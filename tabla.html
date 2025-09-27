@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla con Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 20px;
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #34495e;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1000px;
+
+            /* Scroll habilitado */
+            max-height: 80vh;
+            /* altura máxima del modal */
+            overflow-y: auto;
+            /* barra de desplazamiento vertical */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        caption {
+            caption-side: top;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Evaluación de Recursos Educativos Digitales</h1>
+    <button id="openModal">Ver tabla de evaluación</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Modelo Integrado de Evaluación de Recursos Educativos Digitales (MIERED)</h2>
+            <p><strong>Escala de valoración:</strong> 1 = Deficiente, 2 = Regular, 3 = Aceptable, 4 = Bueno, 5 =
+                Excelente.</p>
+            <table>
+                <caption>Dimensiones y criterios</caption>
+                <thead>
+                    <tr>
+                        <th>Dimensión</th>
+                        <th>Criterio</th>
+                        <th>1 – Deficiente</th>
+                        <th>2 – Regular</th>
+                        <th>3 – Aceptable</th>
+                        <th>4 – Bueno</th>
+                        <th>5 – Excelente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calidad del contenido</td>
+                        <td>Fidelidad, congruencia y actualización del contenido.</td>
+                        <td>Información incompleta, desactualizada o con errores.</td>
+                        <td>Información poco clara y limitada.</td>
+                        <td>Información aceptable, aunque con vacíos.</td>
+                        <td>Información clara, pertinente y en gran parte actualizada.</td>
+                        <td>Información completa, actualizada, precisa y altamente pertinente.</td>
+                    </tr>
+                    <tr>
+                        <td>Diseño instruccional y pedagógico</td>
+                        <td>Estructura, orden lógico y alineamiento con objetivos de aprendizaje.</td>
+                        <td>Sin coherencia ni alineación con objetivos.</td>
+                        <td>Presenta incoherencias y poca claridad.</td>
+                        <td>Aceptable, con estructura básica.</td>
+                        <td>Secuencia clara y actividades alineadas.</td>
+                        <td>Diseño bien estructurado, alineado, con actividades variadas y pertinentes.</td>
+                    </tr>
+                    <tr>
+                        <td>Usabilidad y accesibilidad</td>
+                        <td>Desenvoltura de navegación, entendimiento y acceso.</td>
+                        <td>Difícil de usar, con barreras de acceso.</td>
+                        <td>Poco intuitivo, accesibilidad limitada.</td>
+                        <td>Navegación aceptable pero con dificultades.</td>
+                        <td>Fácil de usar, accesible en la mayoría de dispositivos.</td>
+                        <td>Muy fácil de usar, totalmente accesible e inclusivo.</td>
+                    </tr>
+                    <tr>
+                        <td>Interactividad y motivación</td>
+                        <td>Aptitud para motivar e impulsar la participación del aprendiz.</td>
+                        <td>No genera interés ni participación.</td>
+                        <td>Poco atractivo y con baja interacción.</td>
+                        <td>Tiene algunos elementos de motivación.</td>
+                        <td>Atractivo, con recursos que promueven la participación.</td>
+                        <td>Altamente interactivo, atractivo y motivador.</td>
+                    </tr>
+                    <tr>
+                        <td>Reusabilidad y escalabilidad</td>
+                        <td>Aprovechamiento en diferentes contextos.</td>
+                        <td>No es reutilizable ni adaptable.</td>
+                        <td>Reutilización muy limitada.</td>
+                        <td>Puede usarse en un contexto específico.</td>
+                        <td>Reutilizable en varios contextos.</td>
+                        <td>Altamente reutilizable y escalable a múltiples contextos.</td>
+                    </tr>
+                    <tr>
+                        <td>Impacto en el aprendizaje</td>
+                        <td>Aportación al logro de competencias y aprendizaje significativo.</td>
+                        <td>No aporta al aprendizaje.</td>
+                        <td>Aporta muy poco, sin impacto real.</td>
+                        <td>Aporta de manera básica al aprendizaje.</td>
+                        <td>Contribuye positivamente al aprendizaje.</td>
+                        <td>Impacto fuerte, genera aprendizaje significativo y transferible.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Interpretación del promedio final:</strong></p>
+            <ul>
+                <li>1.0 – 1.9 → Deficiente</li>
+                <li>2.0 – 2.9 → Regular</li>
+                <li>3.0 – 3.9 → Aceptable</li>
+                <li>4.0 – 4.4 → Bueno</li>
+                <li>4.5 – 5.0 → Excelente</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("openModal");
+        const span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

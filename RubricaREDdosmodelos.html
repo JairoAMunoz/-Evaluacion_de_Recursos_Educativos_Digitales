@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rúbrica MIERED Comparativa</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f6f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        #tabla-interpretacion {
+            border-collapse: collapse;
+            width: 300px;
+            /* 👈 ancho fijo */
+            margin: 20px auto;
+            /* centra la tabla */
+            border: 2px solid #007bff;
+            position: absolute;
+        }
+
+        #tabla-interpretacion th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 8px;
+            width: 10px;
+            height: 10px;
+        }
+
+        #tabla-interpretacion td {
+            width: 10px;
+            /* ancho de cada celda */
+            height: 10px;
+            /* alto fijo */
+            text-align: center;
+            border: 1px solid black;
+            background-color: #f0f8ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Rúbrica de Evaluación MIERED (Comparativa RED)</h1>
+    <p>
+        <button type="button" onclick="cerrarVentana()" class="btn btn-danger">Cerrar</button>
+    </p>
+
+    <table id="rubrica">
+        <thead>
+            <tr>
+                <th>Dimensión</th>
+                <th>Criterio</th>
+                <th>1 - Deficiente</th>
+                <th>2 - Regular</th>
+                <th>3 - Aceptable</th>
+                <th>4 - Bueno</th>
+                <th>5 - Excelente</th>
+                <th>Calificación RED 1</th>
+                <th>Calificación RED 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Calidad del contenido</td>
+                <td>Fidelidad, congruencia y actualización del contenido.</td>
+                <td>Información incompleta, desactualizada o con errores.</td>
+                <td>Información poco clara y limitada.</td>
+                <td>Información aceptable, aunque con vacíos.</td>
+                <td>Información clara, pertinente y en gran parte actualizada.</td>
+                <td>Información completa, actualizada, precisa y altamente pertinente.</td>
+                <td><input type="number" min="1" max="5" value="" id="a"></td>
+                <td><input type="number" min="1" max="5" value="" id="g"></td>
+            </tr>
+            <tr>
+                <td>Diseño instruccional</td>
+                <td>Estructura, ordén lógico y alineamiento con objetivos de aprendizaje.</td>
+                <td>Sin coherencia ni alineación con objetivos.</td>
+                <td>Presenta incoherencias y poca claridad.</td>
+                <td>Aceptable, con estructura básica.</td>
+                <td>Secuencia clara y actividades alineadas.</td>
+                <td>Diseño bien estructurado, alineado, con actividades variadas y pertinentes.</td>
+                <td><input type="number" min="1" max="5" value="" id="b"></td>
+                <td><input type="number" min="1" max="5" value="" id="h"></td>
+            </tr>
+            <tr>
+                <td>Usabilidad y accesibilidad</td>
+                <td>Desenvoltura de navegación, entendimiento y acceso para todos los usuarios.</td>
+                <td>Difícil de usar, con barreras de acceso.</td>
+                <td>Poco intuitivo, accesibilidad limitada.</td>
+                <td>Navegación aceptable pero con dificultades.</td>
+                <td>Fácil de usar, accesible en la mayoría de dispositivos.</td>
+                <td>Muy fácil de usar, totalmente accesible e inclusivo.</td>
+                <td><input type="number" min="1" max="5" value="" id="c"></td>
+                <td><input type="number" min="1" max="5" value="" id="i"> </td>
+            </tr>
+            <tr>
+                <td>Interactividad y motivación</td>
+                <td>Aptitud para motivar e impulsar la participación del aprendiz.</td>
+                <td>No genera interés ni participación.</td>
+                <td>Poco atractivo y con baja interacción.</td>
+                <td>Tiene algunos elementos de motivación.</td>
+                <td>Atractivo, con recursos que promueven la participación.</td>
+                <td>Altamente interactivo, atractivo y motivador.</td>
+                <td><input type="number" min="1" max="5" value="" id="d"></td>
+                <td><input type="number" min="1" max="5" value="" id="j"></td>
+            </tr>
+            <tr>
+                <td>Reusabilidad y escalabilidad</td>
+                <td>Probabilidad de aprovechamiento en diferentes contextos y programas.</td>
+                <td>No es reutilizable ni adaptable.</td>
+                <td>Reutilización muy limitada.</td>
+                <td>Puede usarse en un contexto específico.</td>
+                <td>Reutilizable en varios contextos.</td>
+                <td>Altamente reutilizable y escalable a múltiples programas y contextos.</td>
+                <td><input type="number" min="1" max="5" value="" id="e"></td>
+                <td><input type="number" min="1" max="5" value="" id="k"></td>
+            </tr>
+            <tr>
+                <td>Impacto en el aprendizaje</td>
+                <td>Aportación al logro de competencias y al aprendizaje significativo.</td>
+                <td>No aporta al aprendizaje.</td>
+                <td>Aporta muy poco, sin impacto real.</td>
+                <td>Aporta de manera básica al aprendizaje.</td>
+                <td>Contribuye positivamente al aprendizaje.</td>
+                <td>Impacto fuerte, genera aprendizaje significativo y transferible.</td>
+                <td><input type="number" min="1" max="5" value="" id="f"></td>
+                <td><input type="number" min="1" max="5" value="" id="l"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <label for="nombre">Nombre del RED 1: </label><input type="text" name="nred" id="nred"
+        placeholder="Introduce nombre del RED 1"><br />
+
+    <label for="nombre">Nombre del RED 2: </label><input type="text" name="nred2" id="nred2"
+        placeholder="Introduce nombre del RED 2"><br />
+    <button onclick="mostrarGraficos()">Ver Gráficos Comparativos</button>
+    <div id="ali">
+        <table id="tabla-interpretacion">
+            <thead>
+                <tr>
+                    <th colspan="2">Interpretación del promedio final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Deficiente</td>
+                    <td>1.0 – 1.9</td>
+                </tr>
+                <tr>
+                    <td>Regular</td>
+                    <td>2.0 – 2.9</td>
+                </tr>
+                <tr>
+                    <td>Aceptable</td>
+                    <td>3.0 – 3.9</td>
+                </tr>
+                <tr>
+                    <td>Bueno</td>
+                    <td>4.0 – 4.4</td>
+                </tr>
+                <tr>
+                    <td>Excelente</td>
+                    <td>4.5 – 5.0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Resultados de la Evaluación (RED 1 vs RED 2)</h2>
+            <canvas id="barChart"></canvas>
+            <canvas id="radarChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+
+
+        function mostrarGraficos() {
+            var con = 0;
+            var con2 = 0;
+            var promed = 0;
+            var promed2 = 0;
+            con = parseInt(document.getElementById('a').value) + parseInt(document.getElementById('b').value) + parseInt(document.getElementById('c').value) + parseInt(document.getElementById('d').value) + parseInt(document.getElementById('e').value) + parseInt(document.getElementById('f').value);
+            con2 = parseInt(document.getElementById('g').value) + parseInt(document.getElementById('h').value) + parseInt(document.getElementById('i').value) + parseInt(document.getElementById('j').value) + parseInt(document.getElementById('k').value) + parseInt(document.getElementById('l').value);
+            promed = con / 6;
+            promed2 = con2 / 6;
+            var result = "";
+            if (promed >= 0 && promed <= 1.9) {
+                result = "Deficiente";
+            }
+            if (promed >= 2.0 && promed <= 2.9) {
+                result = "Regular";
+            }
+            if (promed >= 3.0 && promed <= 3.9) {
+                result = "Aceptable";
+            }
+            if (promed >= 4.0 && promed <= 4.4) {
+                result = "Bueno";
+            }
+            if (promed >= 4.5 && promed <= 5.0) {
+                result = "Excelente";
+            }
+            var result2 = "";
+            if (promed2 >= 0 && promed2 <= 1.9) {
+                result2 = "Deficiente";
+            }
+            if (promed2 >= 2.0 && promed2 <= 2.9) {
+                result2 = "Regular";
+            }
+            if (promed2 >= 3.0 && promed2 <= 3.9) {
+                result2 = "Aceptable";
+            }
+            if (promed2 >= 4.0 && promed2 <= 4.4) {
+                result2 = "Bueno";
+            }
+            if (promed2 >= 4.5 && promed2 <= 5.0) {
+                result2 = "Excelente";
+            }
+
+
+
+
+            const rows = document.querySelectorAll("#rubrica tbody tr");
+            const labels = [];
+            const values1 = [];
+            const values2 = [];
+
+            rows.forEach(row => {
+                const dim = row.cells[0].innerText;
+                const val1 = row.cells[7].querySelector("input").value;
+                const val2 = row.cells[8].querySelector("input").value;
+                labels.push(dim);
+                values1.push(parseInt(val1));
+                values2.push(parseInt(val2));
+            });
+
+            document.getElementById("modal").style.display = "block";
+
+            // === Bar Chart Comparativo ===
+            const ctxBar = document.getElementById("barChart").getContext("2d");
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'RED 1:  ' + document.getElementById("nred").value + '   PROMEDIO: ' + promed.toFixed(2) + '  Interpretación del promedio  ' + result,
+                            data: values1,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                        },
+                        {
+                            label: 'RED 2:  ' + document.getElementById("nred2").value + '   PROMEDIO: ' + promed2.toFixed(2) + '  Interpretación del promedio  ' + result2,
+                            data: values2,
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 18,
+                                    weight: 'bold'
+                                },
+                                color: 'black'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 5,
+                            ticks: { stepSize: 1 }
+                        }
+                    }
+                }
+            });
+
+            // === Radar Chart Comparativo ===
+            const ctxRadar = document.getElementById("radarChart").getContext("2d");
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'RED 1: ' + document.getElementById("nred").value + '   PROMEDIO: ' + promed.toFixed(2) + '  Interpretación del promedio  ' + result,
+                            data: values1,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+                        },
+                        {
+                            label: 'RED 2: ' + document.getElementById("nred2").value + '   PROMEDIO: ' + promed2.toFixed(2) + '  Interpretación del promedio  ' + result2,
+                            data: values2,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            pointBackgroundColor: 'rgba(255, 99, 132, 1)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 18,
+                                    weight: 'bold'
+                                },
+                                color: 'black'
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 5,
+                            ticks: { stepSize: 1 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
+    <script>
+        function cerrarVentana() {
+            window.close(); // Intenta cerrar la ventana
+        }
+    </script>
+</body>
+
+</html>
